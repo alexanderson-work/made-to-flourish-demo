@@ -1,0 +1,8 @@
+---
+// Button (Figma: Actions → Button / Submit Button). <a> for navigation, <button> for actions.
+import type { HTMLAttributes } from 'astro/types';
+type Props = { href?: string; variant?: 'primary' | 'secondary'; block?: boolean; type?: 'button' | 'submit'; class?: string } & Omit<HTMLAttributes<'button'>, 'type'>;
+const { href, variant = 'primary', block = false, type = 'button', class: cls, ...rest } = Astro.props;
+const classes = ['mtf-button', variant === 'secondary' && 'mtf-button--secondary', block && 'mtf-button--block', cls];
+---
+{href ? <a href={href} class:list={classes} {...(rest as any)}><slot /></a> : <button type={type} class:list={classes} {...rest}><slot /></button>}

@@ -1,0 +1,22 @@
+---
+// Section / Stories: a panel with two stories in view and an arrow to scroll to the next (stacked on phones).
+import Story from '../components/Story.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import Floral from '../components/Floral.astro';
+import { stories } from '../data/site';
+---
+<section id="stories" class="mtf-section" aria-labelledby="stories-title">
+  <div class="mtf-container mtf-panel mtf-stories mtf-appear mtf-appear--grow">
+    <Floral name="liliesTall" width={282} parallax />
+    <h2 id="stories-title" class="mtf-h1" data-reveal="words">Stories of Impact</h2>
+    <div class="mtf-carousel" data-carousel>
+      <div class="mtf-stories__list" role="region" aria-label="Stories" tabindex="0" data-track>
+        {stories.map((s) => <Story title={s.title} name={s.name} role={s.role}>{s.quote}</Story>)}
+      </div>
+      <button type="button" class="mtf-carousel-arrow mtf-carousel-arrow--prev" aria-label="Previous stories" data-prev hidden><Icon name="chevron-left" size={18} /></button>
+      <button type="button" class="mtf-carousel-arrow" aria-label="Next stories" data-next><Icon name="chevron-right" size={18} /></button>
+    </div>
+    <Button href="/register">RSVP</Button>
+  </div>
+</section>

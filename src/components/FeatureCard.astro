@@ -1,0 +1,15 @@
+---
+// Feature Card (Figma: Content → Feature Card): tag, title + subtitle, body, optional link, floral at the corner.
+import Tag from './Tag.astro';
+import IconLink from './IconLink.astro';
+import Floral from './Floral.astro';
+interface Props { tag: string; title: string; subtitle: string; titleId?: string; link?: { label: string; href: string }; floral?: 'liliesTall' | 'daffodils' }
+const { tag, title, subtitle, titleId, link, floral = 'liliesTall' } = Astro.props;
+---
+<article class="mtf-feature-card mtf-appear mtf-appear--slide">
+  <Floral name={floral} width={264} class={`mtf-floral--${floral}`} />
+  <Tag size="small">{tag}</Tag>
+  <div class="mtf-feature-card__heading"><h2 id={titleId} class="mtf-h3">{title}</h2><p class="mtf-body-display">{subtitle}</p></div>
+  <p><slot /></p>
+  {link && <IconLink href={link.href} external>{link.label}</IconLink>}
+</article>

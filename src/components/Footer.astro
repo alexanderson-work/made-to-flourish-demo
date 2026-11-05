@@ -1,0 +1,18 @@
+---
+// Footer (Figma: Chrome & Media → Footer).
+import Button from './Button.astro';
+import { footerNav } from '../data/site';
+---
+<footer class="mtf-footer">
+  <div class="mtf-footer__inner">
+    <a class="mtf-logo" href="/" aria-label="Made to Flourish, home"><img src="/assets/logo-wordmark-white.svg" alt="" width="275" height="100" loading="lazy" /></a>
+    <nav aria-label="Footer">
+      {footerNav.map((col, i) => (
+        <ul>
+          {col.map((l) => <li><a class="mtf-nav-link" href={l.href}>{l.label}</a></li>)}
+          {i === footerNav.length - 1 && <li><Button href="/register">RSVP</Button></li>}
+        </ul>
+      ))}
+    </nav>
+  </div>
+</footer>

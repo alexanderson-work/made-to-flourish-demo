@@ -1,0 +1,25 @@
+---
+// Schedule Day + Schedule Rows (Figma: Content → Schedule Day / Schedule Row).
+import Pill from './Pill.astro';
+import type { Row } from '../data/site';
+interface Props { day: string; date: string; rows: Row[] }
+const { day, date, rows } = Astro.props;
+const id = `day-${day.toLowerCase()}`;
+---
+<section class="mtf-day" aria-labelledby={id}>
+  <h3 id={id}>{day}</h3>
+  <ul>
+    {rows.map((r) => (
+      <li class="mtf-row">
+        <time datetime={`${date}T${r.datetime}`}>{r.time}</time>
+        <div class="mtf-row__text">
+          <div class="mtf-row__copy">
+            <p class="mtf-row__title">{r.title}</p>
+            {r.details && <p class="mtf-row__details">{r.details}</p>}
+          </div>
+          {r.location && <Pill>{r.location}</Pill>}
+        </div>
+      </li>
+    ))}
+  </ul>
+</section>

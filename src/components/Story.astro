@@ -1,0 +1,10 @@
+---
+// Story (Figma: Content → Story).
+interface Props { title: string; name: string; role: string }
+const { title, name, role } = Astro.props;
+---
+<figure class="mtf-story">
+  <h3>{title}</h3>
+  <blockquote><p><slot /></p></blockquote>
+  <figcaption><strong>{name}</strong><span>{role}</span></figcaption>
+</figure>

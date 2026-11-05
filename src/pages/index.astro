@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../sections/Hero.astro';
+import Invitation from '../sections/Invitation.astro';
+import PhotoStrip from '../components/PhotoStrip.astro';
+import Speakers from '../sections/Speakers.astro';
+import FeatureOnPhoto from '../sections/FeatureOnPhoto.astro';
+import Highlights from '../sections/Highlights.astro';
+import Schedule from '../sections/Schedule.astro';
+import Stories from '../sections/Stories.astro';
+import Faq from '../sections/Faq.astro';
+import ContactBand from '../sections/ContactBand.astro';
+import { photos } from '../data/media';
+import { venue, stadium } from '../data/site';
+---
+<Base>
+  <Hero />
+  <Invitation />
+  <PhotoStrip photos={photos.gathering} label="Photos from past gatherings" />
+  <Speakers />
+  <FeatureOnPhoto id="venue" photo={photos.venue} tag={venue.tag} title={venue.title} subtitle={venue.subtitle} link={venue.link}>{venue.body}</FeatureOnPhoto>
+  <PhotoStrip photos={photos.venueStrip} label="Photos of The Crossroads Hotel" />
+  <Highlights />
+  <Schedule />
+  <FeatureOnPhoto id="stadium" photo={photos.stadium} tag={stadium.tag} title={stadium.title} subtitle={stadium.subtitle} floral="daffodils">{stadium.body}</FeatureOnPhoto>
+  <PhotoStrip photos={photos.stadiumStrip} label="Photos of Arrowhead Stadium" />
+  <Stories />
+  <Faq />
+  <ContactBand />
+</Base>

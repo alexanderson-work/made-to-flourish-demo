@@ -1,0 +1,19 @@
+---
+// Speaker Modal (Figma: Content → Speaker Modal). A native <dialog>; behavior in layouts/Base.astro.
+import Photo from './Photo.astro';
+import Icon from './Icon.astro';
+import type { Speaker } from '../data/speakers';
+interface Props { speaker: Speaker }
+const { speaker } = Astro.props;
+const id = `bio-${speaker.id}`;
+---
+<dialog class="mtf-modal" id={id} aria-labelledby={`${id}-name`}>
+  <div class="mtf-modal__inner">
+    <Photo src={speaker.photo} alt="" widths={[400, 800]} sizes="(max-width: 809.98px) 92vw, 360px" />
+    <div class="mtf-modal__content">
+      <button type="button" class="mtf-icon-button mtf-modal__close" aria-label="Close" data-close autofocus><Icon name="close" /></button>
+      <div class="mtf-modal__heading"><h2 id={`${id}-name`} class="mtf-h4">{speaker.name}</h2><p class="mtf-body-display">{speaker.title}</p></div>
+      <div>{speaker.bio.map((p) => <p>{p}</p>)}</div>
+    </div>
+  </div>
+</dialog>

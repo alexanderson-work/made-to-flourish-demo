@@ -1,0 +1,20 @@
+---
+// Form Field (Figma: Labels & Forms → Form Field): label above, then an input, textarea or select.
+interface Props {
+  label: string; name: string; as?: 'input' | 'textarea' | 'select'; type?: string; required?: boolean;
+  autocomplete?: string; placeholder?: string; options?: string[]; min?: string; max?: string;
+}
+const { label, name, as = 'input', type = 'text', required = false, autocomplete, placeholder, options = [], min, max } = Astro.props;
+const req = required ? { required: true, 'aria-required': 'true' } : {};
+---
+<label class="mtf-field-label">
+  <span>{label}</span>
+  {as === 'textarea' && <textarea class="mtf-textarea" name={name} placeholder={placeholder} {...req}></textarea>}
+  {as === 'select' && (
+    <select class="mtf-select" name={name} {...req}>
+      <option value="">Select…</option>
+      {options.map((o) => <option>{o}</option>)}
+    </select>
+  )}
+  {as === 'input' && <input class="mtf-input" type={type} name={name} autocomplete={autocomplete} placeholder={placeholder} min={min} max={max} {...req} />}
+</label>

@@ -1,0 +1,207 @@
+/* Made To Flourish design tokens.
+   Generated from the Figma design system (https://www.figma.com/design/xx0mQvZAIM5k3BUup1rt7l) by build-tokens.py; do not edit by hand.
+   Breakpoints: Desktop >= 1200px, Tablet 810-1199.98px, Phone <= 809.98px. Values below are Desktop; Tablet and Phone override at the bottom.
+   Fonts: license and self-host Tiempos Text Regular Italic and GT Pressura Light, then add @font-face rules (see DESIGN-SYSTEM.md). */
+
+:root {
+  /* Brand colors */
+  --mtf-brand-deep-orange: #F35622; /* Actions, feature cards, contact band, location pills, text links */
+  --mtf-brand-soft-orange: #E27B39; /* Diamond markers */
+  --mtf-brand-deep-teal: #276161; /* Cards and panels */
+  --mtf-brand-deep-teal-shade: #1D5552; /* Page background, nav, footer, secondary button, tags */
+  --mtf-brand-dark: #222021; /* Text on light surfaces; dark schedule rows at 10% */
+  --mtf-brand-white: #FFFFFF; /* All text on the site */
+  --mtf-status-red: #FF2244; /* Form errors */
+
+  /* Transparent steps */
+  --mtf-alpha-white-10: rgb(255 255 255 / 0.1); /* Borders; light schedule rows */
+  --mtf-alpha-white-60: rgb(255 255 255 / 0.6); /* Link hover, current page, placeholder text */
+  --mtf-alpha-white-80: rgb(255 255 255 / 0.8); /* Secondary text */
+  --mtf-alpha-deep-teal-shade-60: rgb(29 85 82 / 0.6); /* Nav background (with backdrop blur) */
+  --mtf-alpha-deep-orange-60: rgb(243 86 34 / 0.6); /* Text link hover */
+  --mtf-alpha-dark-10: rgb(34 32 33 / 0.1); /* Dark schedule rows */
+  --mtf-alpha-gray-187-15: rgb(187 187 187 / 0.15); /* Form field fill */
+  --mtf-alpha-gray-136-10: rgb(136 136 136 / 0.1); /* Form field border */
+  --mtf-alpha-red-15: rgb(255 34 68 / 0.15); /* Error state fill */
+
+  /* Semantic colors: use these in components */
+  --mtf-color-bg-page: var(--mtf-brand-deep-teal-shade); /* Page background */
+  --mtf-color-bg-surface: var(--mtf-brand-deep-teal); /* Cards and panels */
+  --mtf-color-bg-surface-hover: var(--mtf-brand-deep-teal-shade); /* FAQ item hover */
+  --mtf-color-bg-accent: var(--mtf-brand-deep-orange); /* Feature cards and the contact band */
+  --mtf-color-bg-tag: var(--mtf-brand-deep-teal-shade); /* Tag chips */
+  --mtf-color-bg-nav: var(--mtf-alpha-deep-teal-shade-60); /* Fixed nav bar (with backdrop blur) */
+  --mtf-color-bg-row-light: var(--mtf-alpha-white-10); /* Schedule row, light tone */
+  --mtf-color-bg-row-dark: var(--mtf-alpha-dark-10); /* Schedule row, dark tone */
+  --mtf-color-bg-field: var(--mtf-alpha-gray-187-15); /* Form fields */
+  --mtf-color-bg-error: var(--mtf-alpha-red-15); /* Error state fill */
+  --mtf-color-bg-light: var(--mtf-brand-white); /* Light surfaces (the title card) */
+  --mtf-color-action-primary: var(--mtf-brand-deep-orange); /* Primary button */
+  --mtf-color-action-secondary: var(--mtf-brand-deep-teal-shade); /* Secondary button */
+  --mtf-color-text-primary: var(--mtf-brand-white); /* Default text */
+  --mtf-color-text-secondary: var(--mtf-alpha-white-80); /* Secondary text: schedule details, notes */
+  --mtf-color-text-hover: var(--mtf-alpha-white-60); /* Nav and white links on hover; current page */
+  --mtf-color-text-link: var(--mtf-brand-deep-orange); /* Inline text links */
+  --mtf-color-text-link-hover: var(--mtf-alpha-deep-orange-60); /* Inline text links on hover */
+  --mtf-color-text-placeholder: var(--mtf-alpha-white-60); /* Form placeholder text */
+  --mtf-color-text-inverse: var(--mtf-brand-dark); /* Text on light surfaces */
+  --mtf-color-text-error: var(--mtf-status-red); /* Error messages */
+  --mtf-color-border-subtle: var(--mtf-alpha-white-10); /* 1px border on cards, tags, panels */
+  --mtf-color-border-field: var(--mtf-alpha-gray-136-10); /* Form field border */
+  --mtf-color-decor-marker: var(--mtf-brand-soft-orange); /* Diamond markers */
+  --mtf-color-icon-default: var(--mtf-brand-white); /* Icons */
+
+  /* Fonts */
+  --mtf-font-heading: "Tiempos Text", Georgia, "Times New Roman", serif; /* Tiempos Text Regular Italic (Klim Type Foundry) */
+  --mtf-font-heading-style: italic;
+  --mtf-font-heading-weight: 400;
+  --mtf-font-body: "GT Pressura", "Helvetica Neue", Arial, sans-serif; /* GT Pressura Light (Grilli Type) */
+  --mtf-font-body-style: normal;
+  --mtf-font-body-weight: 300;
+
+  /* Type sizes (Desktop) and line heights */
+  --mtf-font-size-h1: 4rem; /* 64px · Heading 1 */
+  --mtf-font-size-h2: 3.5rem; /* 56px · Heading 2 */
+  --mtf-font-size-h3: 3rem; /* 48px · Heading 3 */
+  --mtf-font-size-h4: 2.5rem; /* 40px · Heading 4 */
+  --mtf-font-size-h5: 2rem; /* 32px · Heading 5 */
+  --mtf-font-size-h6: 1.5rem; /* 24px · Heading 6 */
+  --mtf-font-size-body-display: 1.5rem; /* 24px · Body Display */
+  --mtf-font-size-body: 1.125rem; /* 18px · Body */
+  --mtf-font-size-label: 1.125rem; /* 18px · Buttons & Links */
+  --mtf-font-size-label-sm: 1rem; /* 16px · Buttons & Links Small */
+  --mtf-font-size-field: 0.875rem; /* 14px · Field */
+  --mtf-line-height-tight: 1.2;
+  --mtf-line-height-display: 1.3;
+  --mtf-paragraph-spacing-heading: 40px;
+  --mtf-paragraph-spacing-body: 20px;
+
+  /* Spacing scale */
+  --mtf-space-0: 0px;
+  --mtf-space-4: 4px;
+  --mtf-space-6: 6px;
+  --mtf-space-8: 8px;
+  --mtf-space-10: 10px;
+  --mtf-space-12: 12px;
+  --mtf-space-16: 16px;
+  --mtf-space-18: 18px;
+  --mtf-space-20: 20px;
+  --mtf-space-24: 24px;
+  --mtf-space-36: 36px;
+  --mtf-space-40: 40px;
+  --mtf-space-60: 60px;
+  --mtf-space-64: 64px;
+  --mtf-space-80: 80px;
+  --mtf-space-120: 120px;
+  --mtf-space-140: 140px;
+  --mtf-space-160: 160px;
+  --mtf-space-200: 200px;
+
+  /* Layout (Desktop) */
+  --mtf-layout-page-margin: 60px; /* Left/right padding of sections and the nav */
+  --mtf-layout-section-padding-y: 80px; /* Top/bottom padding of standard sections */
+  --mtf-layout-section-gap: 64px; /* Section title to content */
+  --mtf-layout-hero-top: 160px; /* Hero top padding (clears the fixed nav) */
+  --mtf-layout-page-top: 200px; /* Inner page top padding (clears the fixed nav) */
+  --mtf-layout-column-gap: 80px; /* Gap between two columns (they stack on phones) */
+  --mtf-layout-panel-padding: 40px; /* Padding of large panels (Stories) */
+  --mtf-layout-container-max: 1200px; /* Max width of section content */
+  --mtf-layout-speaker-card-width: 252px; /* Speaker card width (4 / 3 / 1 per row, gap 24) */
+  --mtf-layout-feature-card-width: 500px; /* Feature card width (phone: full width) */
+  --mtf-layout-speaker-columns: 4;
+
+  /* Shape, effects, motion */
+  --mtf-radius-none: 0;
+  --mtf-border-width: 1px;
+  --mtf-border-subtle: var(--mtf-border-width) solid var(--mtf-color-border-subtle);
+  --mtf-blur-backdrop: 25px;
+  --mtf-opacity-hover: 0.6;
+  --mtf-opacity-disabled: 0.5;
+  --mtf-ease-spring: linear(0, 0.034, 0.117, 0.225, 0.344, 0.46, 0.569, 0.666, 0.748, 0.817, 0.872, 0.916, 0.949, 0.973, 0.99, 1.002, 1.009, 1.013, 1.015, 1.015, 1.014, 1.013, 1.011, 1.009, 1.008, 1.006, 1.005, 1.003, 1.002, 1.002, 1.001, 1.001, 1); /* Framer spring, bounce 0.2: entrances */
+  --mtf-ease-spring-soft: linear(0, 0.079, 0.236, 0.403, 0.551, 0.671, 0.764, 0.833, 0.883, 0.919, 0.944, 0.962, 0.974, 0.983, 0.988, 0.992, 0.995, 0.997, 0.998, 0.998, 1); /* Framer spring, no bounce: text reveals, hero, FAQ answer */
+  --mtf-ease-spring-hover: linear(0, 0.037, 0.127, 0.246, 0.374, 0.5, 0.616, 0.717, 0.801, 0.869, 0.922, 0.962, 0.99, 1.009, 1.02, 1.026, 1.028, 1.028, 1.025, 1.022, 1.019, 1.015, 1.012, 1.009, 1.006, 1.004, 1.002, 1.001, 1, 1, 0.999, 0.999, 1); /* Framer spring, bounce 0.25: hover dims */
+  --mtf-ease-standard: cubic-bezier(0.44, 0, 0.56, 1); /* link color, form state cross-fades */
+  --mtf-ease-appear: var(--mtf-ease-spring); /* alias kept for older code */
+  --mtf-motion-hover-duration: 0.4s; /* link color */
+  --mtf-motion-press-duration: 0.45s; /* button, icon and arrow dims */
+  --mtf-motion-appear-duration: 1.2s; /* entrances and text reveals */
+  --mtf-motion-quick-duration: 0.4s; /* FAQ answer and height */
+  --mtf-motion-toggle-duration: 0.3s; /* FAQ plus to X */
+  --mtf-motion-state-duration: 0.2s; /* form state cross-fades */
+  --mtf-motion-appear-distance: 150px; /* cards, feature cards, modal */
+  --mtf-motion-panel-distance: 50px; /* FAQ items, Stories panel */
+  --mtf-motion-text-distance: 10px; /* text reveals */
+  --mtf-motion-text-blur: 10px; /* text reveals */
+  --mtf-motion-text-stagger: 0.05s; /* between words (or lines) */
+  --mtf-motion-stagger: 0.2s; /* between diamonds; hero tag and title card */
+  --mtf-motion-start-scale: 0.5; /* panels and markers grow from */
+  --mtf-motion-hero-scale: 1.2; /* hero settles from */
+  --mtf-motion-parallax: 0.1; /* florals move this much extra per px of scroll (Framer speed 110) */
+}
+
+/* Tablet */
+@media (max-width: 1199.98px) {
+  :root {
+    --mtf-font-size-h1: 3.1875rem; /* 51px */
+    --mtf-font-size-h2: 2.8125rem; /* 45px */
+    --mtf-font-size-h3: 2.375rem; /* 38px */
+    --mtf-font-size-h4: 2rem; /* 32px */
+    --mtf-font-size-h5: 1.625rem; /* 26px */
+    --mtf-font-size-h6: 1.25rem; /* 20px */
+    --mtf-font-size-body-display: 1.25rem; /* 20px */
+    --mtf-font-size-body: 1rem; /* 16px */
+    --mtf-font-size-label: 1rem; /* 16px */
+    --mtf-font-size-label-sm: 0.875rem; /* 14px */
+    --mtf-layout-column-gap: 40px;
+    --mtf-layout-speaker-card-width: 214px;
+    --mtf-layout-feature-card-width: 400px;
+    --mtf-layout-speaker-columns: 3;
+  }
+}
+
+/* Phone */
+@media (max-width: 809.98px) {
+  :root {
+    --mtf-font-size-h1: 2.5625rem; /* 41px */
+    --mtf-font-size-h2: 2.25rem; /* 36px */
+    --mtf-font-size-h3: 1.9375rem; /* 31px */
+    --mtf-font-size-h4: 1.625rem; /* 26px */
+    --mtf-font-size-h5: 1.25rem; /* 20px */
+    --mtf-font-size-h6: 1rem; /* 16px */
+    --mtf-font-size-body-display: 1rem; /* 16px */
+    --mtf-font-size-body: 0.875rem; /* 14px */
+    --mtf-font-size-label: 0.875rem; /* 14px */
+    --mtf-font-size-label-sm: 0.75rem; /* 12px */
+    --mtf-layout-page-margin: 20px;
+    --mtf-layout-section-padding-y: 40px;
+    --mtf-layout-section-gap: 40px;
+    --mtf-layout-hero-top: 140px;
+    --mtf-layout-column-gap: 40px;
+    --mtf-layout-panel-padding: 20px;
+    --mtf-layout-speaker-card-width: 350px;
+    --mtf-layout-feature-card-width: 350px;
+    --mtf-layout-speaker-columns: 1;
+  }
+}
+
+/* Text styles as classes (optional). Headings: italic serif; everything else: light grotesque. */
+.mtf-h1, .mtf-h2, .mtf-h3, .mtf-h4, .mtf-h5, .mtf-h6 {
+  font-family: var(--mtf-font-heading); font-style: var(--mtf-font-heading-style); font-weight: var(--mtf-font-heading-weight);
+  line-height: var(--mtf-line-height-tight); letter-spacing: 0; margin: 0;
+}
+.mtf-h1 { font-size: var(--mtf-font-size-h1); }
+.mtf-h2 { font-size: var(--mtf-font-size-h2); }
+.mtf-h3 { font-size: var(--mtf-font-size-h3); }
+.mtf-h4 { font-size: var(--mtf-font-size-h4); }
+.mtf-h5 { font-size: var(--mtf-font-size-h5); }
+.mtf-h6 { font-size: var(--mtf-font-size-h6); }
+
+.mtf-body-display, .mtf-body, .mtf-label, .mtf-label-sm, .mtf-field {
+  font-family: var(--mtf-font-body); font-style: normal; font-weight: var(--mtf-font-body-weight);
+  line-height: var(--mtf-line-height-tight); letter-spacing: 0;
+}
+.mtf-body-display { font-size: var(--mtf-font-size-body-display); line-height: var(--mtf-line-height-display); text-transform: uppercase; }
+.mtf-body { font-size: var(--mtf-font-size-body); }
+.mtf-label { font-size: var(--mtf-font-size-label); text-transform: uppercase; }
+.mtf-label-sm { font-size: var(--mtf-font-size-label-sm); text-transform: uppercase; }
+.mtf-field { font-size: var(--mtf-font-size-field); }

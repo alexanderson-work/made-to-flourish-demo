@@ -1,0 +1,14 @@
+---
+// Section / Feature on Photo: a full-bleed photo with the Feature Card at the bottom left.
+import { backgroundUrl } from '../lib/images';
+import FeatureCard from '../components/FeatureCard.astro';
+interface Props { id?: string; photo: ImageMetadata; tag: string; title: string; subtitle: string; link?: { label: string; href: string }; floral?: 'liliesTall' | 'daffodils' }
+const { id, photo, tag, title, subtitle, link, floral } = Astro.props;
+const bg = await backgroundUrl(photo, 2000);
+const titleId = `${id ?? 'feature'}-title`;
+---
+<section id={id} class="mtf-section mtf-feature" aria-labelledby={titleId} style={`background-image: url('${bg}')`}>
+  <div class="mtf-container">
+    <FeatureCard tag={tag} title={title} subtitle={subtitle} titleId={titleId} link={link} floral={floral}><slot /></FeatureCard>
+  </div>
+</section>

@@ -1,0 +1,21 @@
+---
+// Section / Invitation: event details + RSVP, then the welcome. This holds the page's one h1.
+import Button from '../components/Button.astro';
+import Floral from '../components/Floral.astro';
+import { event, invitation } from '../data/site';
+---
+<section class="mtf-section mtf-invitation" aria-labelledby="invite-title">
+  <Floral name="liliesWide" width={380} parallax />
+  <div class="mtf-container">
+    <div class="mtf-columns">
+      <div class="mtf-invitation__details">
+        <p class="mtf-body-display" data-reveal="words">{event.dates}<br />{event.venue}<br />{event.city}</p>
+        <Button href="/register">RSVP</Button>
+      </div>
+      <div class="mtf-invitation__copy">
+        <h1 id="invite-title" class="mtf-h1" data-reveal="words">You are invited.</h1>
+        <div data-reveal="block">{invitation.map((p) => <p>{p}</p>)}</div>
+      </div>
+    </div>
+  </div>
+</section>

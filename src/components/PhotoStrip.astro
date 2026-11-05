@@ -1,0 +1,14 @@
+---
+// Photo Strip (Figma: Chrome & Media → Photo Strip): full-bleed scroll-snap row with carousel arrows.
+import Photo from './Photo.astro';
+import Icon from './Icon.astro';
+interface Props { photos: { src: ImageMetadata; alt: string }[]; label: string }
+const { photos, label } = Astro.props;
+---
+<div class="mtf-photo-strip-wrap" data-carousel>
+  <div class="mtf-photo-strip" role="region" aria-label={label} tabindex="0" data-track>
+    {photos.map((p) => <Photo src={p.src} alt={p.alt} widths={[400, 800, 1200]} sizes="(max-width: 809.98px) 50vw, 33vw" />)}
+  </div>
+  <button type="button" class="mtf-carousel-arrow mtf-carousel-arrow--prev" aria-label="Previous photos" data-prev hidden><Icon name="chevron-left" size={18} /></button>
+  <button type="button" class="mtf-carousel-arrow" aria-label="Next photos" data-next><Icon name="chevron-right" size={18} /></button>
+</div>

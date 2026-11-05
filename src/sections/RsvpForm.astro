@@ -1,0 +1,41 @@
+---
+// Section / RSVP Form. Front end only in this test: submitting shows the success state without sending anything.
+import FormField from '../components/FormField.astro';
+import Button from '../components/Button.astro';
+import Floral from '../components/Floral.astro';
+import { contact } from '../data/site';
+---
+<section class="mtf-section mtf-rsvp" aria-labelledby="rsvp-title">
+  <Floral name="liliesWide" width={520} />
+  <div class="mtf-container">
+    <div class="mtf-columns">
+      <div class="mtf-rsvp__intro">
+        <h1 id="rsvp-title" class="mtf-h1" data-reveal="words">RSVP Now</h1>
+        <p>We’re delighted to provide accommodations on February 24 and 25, along with meals during your stay. If you plan to arrive early or extend your visit, additional nights may be added to your reservation based on hotel availability and will be charged to the card provided at check-in.</p>
+        <p>If you have any questions, please contact {contact.name} at <a href={`mailto:${contact.email}`}>{contact.email}</a>.</p>
+      </div>
+      <form class="mtf-form" data-rsvp novalidate>
+        <fieldset class="mtf-form__group">
+          <legend class="mtf-h4">Personal Information</legend>
+          <FormField label="First & Last Name" name="name" required autocomplete="name" />
+          <FormField label="Email" name="email" type="email" required autocomplete="email" />
+          <FormField label="Phone Number (Cell Phone or Best Contact)" name="phone" type="tel" required autocomplete="tel" />
+          <FormField label="Spouse First & Last Name (Optional)" name="spouse_name" />
+          <FormField label="Spouse Email (Optional)" name="spouse_email" type="email" />
+          <FormField label="Spouse Phone Number (Optional)" name="spouse_phone" type="tel" />
+          <FormField label="Please list any dietary restrictions or allergies:" name="dietary" as="textarea" />
+        </fieldset>
+        <fieldset class="mtf-form__group">
+          <legend class="mtf-h4">Hotel Room Needs</legend>
+          <p>Made to Flourish is pleased to cover your hotel stay. Please select your check-in and check-out dates below and indicate your room preference.</p>
+          <p class="mtf-label">Event Check In: 2/24/2026<br />Event Check Out: 2/26/2026</p>
+          <FormField label="Check In Date" name="check_in" type="date" min="2026-02-20" max="2026-02-28" />
+          <FormField label="Check Out Date" name="check_out" type="date" min="2026-02-20" max="2026-02-28" />
+          <FormField label="Room Preference" name="room" as="select" options={['Standard King', 'Double Queen']} />
+        </fieldset>
+        <Button type="submit" block>Submit</Button>
+        <p class="mtf-form__status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>

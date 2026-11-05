@@ -1,0 +1,11 @@
+---
+// A floral cut-out (Figma: Visuals → Florals). Decorative: empty alt. Position it per section with a class;
+// `rotate` turns it (the 2026 site rotates some florals), `height` crops it to a box (object-fit: cover).
+import Photo from './Photo.astro';
+import { art } from '../data/media';
+interface Props { name: 'liliesTall' | 'liliesWide' | 'daffodils'; class?: string; width?: number; rotate?: number; parallax?: boolean }
+const { name, class: cls, width = 400, rotate, parallax = false } = Astro.props;
+---
+<div class:list={['mtf-floral', cls]} style={rotate ? `--floral-rotate: ${rotate}deg` : undefined} aria-hidden="true" data-parallax={parallax ? "" : undefined}>
+  <Photo src={art[name]} alt="" widths={[width, width * 2]} sizes={`${width}px`} />
+</div>

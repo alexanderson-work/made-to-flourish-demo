@@ -1,0 +1,15 @@
+---
+// The six system icons (Figma Visuals → Icons): 24 × 24, 2 px stroke, currentColor. Decorative by default.
+interface Props { name: 'close' | 'plus' | 'arrow-right' | 'chevron-right' | 'chevron-left' | 'chevron-down' | 'calendar'; size?: number; class?: string }
+const { name, size = 24, class: cls } = Astro.props;
+const paths: Record<Props['name'], string> = {
+  close: 'M6 6l12 12M18 6L6 18',
+  plus: 'M12 5v14M5 12h14',
+  'arrow-right': 'M5 12h14M13 6l6 6-6 6',
+  'chevron-right': 'M9 6l6 6-6 6',
+  'chevron-left': 'M15 6l-6 6 6 6',
+  'chevron-down': 'M6 9l6 6 6-6',
+  calendar: 'M4 6h16v14H4zM4 10h16M8 3v4M16 3v4',
+};
+---
+<svg class={cls} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d={paths[name]} /></svg>

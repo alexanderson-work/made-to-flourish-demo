@@ -1,0 +1,12 @@
+---
+// Section / Highlights: three highlights, then RSVP.
+import Highlight from '../components/Highlight.astro';
+import Button from '../components/Button.astro';
+import { highlights } from '../data/site';
+---
+<section id="about" class="mtf-section" aria-label="What to expect">
+  <div class="mtf-container">
+    <div class="mtf-highlights">{highlights.map((h) => <Highlight markers={h.markers} title={h.title}>{h.body}</Highlight>)}</div>
+    <Button href="/register">RSVP</Button>
+  </div>
+</section>

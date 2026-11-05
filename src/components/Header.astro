@@ -1,0 +1,14 @@
+---
+// Navigation (Figma: Chrome & Media → Navigation). Fixed; on phones only the wordmark and RSVP show.
+import Button from './Button.astro';
+import { nav } from '../data/site';
+---
+<header class="mtf-header">
+  <div class="mtf-header__inner">
+    <a class="mtf-logo" href="/" aria-label="Made to Flourish, home"><img src="/assets/logo-wordmark-white.svg" alt="" width="137" height="50" /></a>
+    <nav aria-label="Main">
+      {nav.map((l) => <a class="mtf-nav-link" href={l.href}>{l.label}</a>)}
+      <Button href="/register" aria-current={Astro.url.pathname.startsWith('/register') ? 'page' : undefined}>RSVP</Button>
+    </nav>
+  </div>
+</header>

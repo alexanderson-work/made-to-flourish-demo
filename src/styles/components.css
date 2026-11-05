@@ -1,0 +1,374 @@
+/* Made To Flourish: reference component and section styles.
+   Framework-agnostic CSS built on tokens.css (load tokens.css first). Class names are suggestions;
+   keep the values. Markup for each block is in DESIGN-SYSTEM.md and example.html. */
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--mtf-color-bg-page);
+  color: var(--mtf-color-text-primary);
+  font-family: var(--mtf-font-body);
+  font-weight: var(--mtf-font-body-weight);
+  font-size: var(--mtf-font-size-body);
+  line-height: var(--mtf-line-height-tight);
+}
+img { display: block; max-width: 100%; }
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-family: var(--mtf-font-heading);
+  font-style: var(--mtf-font-heading-style);
+  font-weight: var(--mtf-font-heading-weight);
+  line-height: var(--mtf-line-height-tight);
+}
+p { margin: 0; }
+p + p { margin-top: var(--mtf-paragraph-spacing-body); }
+/* Inside flex layouts the gap does the spacing; don't stack paragraph spacing on top of it. */
+.mtf-row__copy p + p, .mtf-form p + p { margin-top: 0; }
+a { color: var(--mtf-color-text-link); text-decoration: none; transition: color var(--mtf-motion-hover-duration) var(--mtf-ease-standard); }
+a:hover { color: var(--mtf-color-text-link-hover); }
+:focus-visible { outline: 2px solid var(--mtf-brand-white); outline-offset: 3px; }
+/* Anchor links scroll smoothly and land below the fixed header (90 px). */
+html { scroll-behavior: smooth; }
+main [id] { scroll-margin-top: 90px; }
+
+/* ---------- Layout ---------- */
+.mtf-section {
+  position: relative;
+  overflow: clip;
+  padding: var(--mtf-layout-section-padding-y) var(--mtf-layout-page-margin);
+  background: var(--mtf-color-bg-page);
+}
+.mtf-container {
+  width: 100%;
+  max-width: var(--mtf-layout-container-max);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--mtf-layout-section-gap);
+  position: relative;
+  z-index: 1;
+}
+.mtf-columns { display: flex; gap: var(--mtf-layout-column-gap); align-items: flex-start; width: 100%; }
+@media (max-width: 809.98px) { .mtf-columns { flex-direction: column; } }
+
+/* Florals: decorative cut-outs that overlap a section edge. Position per section (see Sections below). Use the class on
+   the <img> itself or on a wrapper around it. --floral-rotate turns it (several florals on the 2026 site are turned). */
+.mtf-floral { position: absolute; z-index: 0; pointer-events: none; height: auto; transform: rotate(var(--floral-rotate, 0deg)); }
+.mtf-floral img { width: 100%; height: auto; }
+
+/* ---------- Actions ---------- */
+.mtf-button {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: var(--mtf-space-12) var(--mtf-space-24);
+  border: 0; border-radius: var(--mtf-radius-none);
+  background: var(--mtf-color-action-primary); color: var(--mtf-color-text-primary);
+  font: inherit; font-family: var(--mtf-font-body); font-weight: var(--mtf-font-body-weight);
+  font-size: var(--mtf-font-size-label); line-height: var(--mtf-line-height-tight); text-transform: uppercase;
+  cursor: pointer; transition: opacity var(--mtf-motion-press-duration) var(--mtf-ease-spring-hover);
+}
+.mtf-button:hover { opacity: var(--mtf-opacity-hover); color: var(--mtf-color-text-primary); }
+.mtf-button--secondary { background: var(--mtf-color-action-secondary); }
+.mtf-button--block { width: 100%; min-height: 40px; padding-block: 0; }
+.mtf-button[disabled] { opacity: var(--mtf-opacity-disabled); cursor: not-allowed; }
+.mtf-button--error { background: var(--mtf-color-bg-error); }
+
+.mtf-icon-link {
+  display: inline-flex; align-items: center; gap: var(--mtf-space-8);
+  color: var(--mtf-color-text-primary); font-size: var(--mtf-font-size-label-sm); text-transform: uppercase;
+  background: none; border: 0; padding: 0; font-family: var(--mtf-font-body); font-weight: var(--mtf-font-body-weight); cursor: pointer;
+  transition: opacity var(--mtf-motion-press-duration) var(--mtf-ease-spring-hover);
+}
+.mtf-icon-link:hover { opacity: var(--mtf-opacity-hover); color: var(--mtf-color-text-primary); }
+.mtf-icon-link svg { width: 18px; height: 18px; }
+
+.mtf-nav-link { color: var(--mtf-color-text-primary); font-size: var(--mtf-font-size-label); text-transform: uppercase; }
+.mtf-nav-link:hover, .mtf-nav-link[aria-current="page"] { color: var(--mtf-color-text-hover); }
+
+.mtf-icon-button { display: inline-flex; padding: 0; border: 0; background: none; color: var(--mtf-color-icon-default); cursor: pointer; transition: opacity var(--mtf-motion-press-duration) var(--mtf-ease-spring-hover); }
+.mtf-icon-button:hover { opacity: var(--mtf-opacity-hover); }
+
+.mtf-carousel-arrow {
+  width: 32px; height: 32px; border-radius: 50%; border: 0; display: inline-grid; place-items: center;
+  background: var(--mtf-color-action-primary); color: var(--mtf-color-text-primary); cursor: pointer;
+  transition: opacity var(--mtf-motion-press-duration) var(--mtf-ease-spring-hover);
+}
+.mtf-carousel-arrow:hover { opacity: var(--mtf-opacity-hover); }
+
+/* ---------- Labels ---------- */
+.mtf-tag {
+  display: inline-block; padding: var(--mtf-space-12);
+  background: var(--mtf-color-bg-tag); border: var(--mtf-border-subtle);
+  font-size: var(--mtf-font-size-body);
+}
+.mtf-tag--small { padding: var(--mtf-space-8) var(--mtf-space-16); font-size: var(--mtf-font-size-label-sm); text-transform: uppercase; }
+.mtf-pill { display: inline-block; padding: var(--mtf-space-6) var(--mtf-space-12); background: var(--mtf-color-bg-accent); font-size: var(--mtf-font-size-body); white-space: nowrap; }
+.mtf-diamonds { display: flex; gap: var(--mtf-space-18); padding: var(--mtf-space-4); }
+.mtf-diamonds span { width: 9px; height: 9px; background: var(--mtf-color-decor-marker); transform: rotate(45deg); margin: 2px; }
+
+/* ---------- Forms ---------- */
+.mtf-form { display: flex; flex-direction: column; gap: var(--mtf-space-20); width: 100%; }
+.mtf-field-label { display: flex; flex-direction: column; gap: var(--mtf-space-10); font-size: var(--mtf-font-size-label-sm); text-transform: uppercase; }
+.mtf-input, .mtf-select, .mtf-textarea {
+  width: 100%; min-height: 40px; padding: var(--mtf-space-12);
+  background: var(--mtf-color-bg-field); border: var(--mtf-border-width) solid var(--mtf-color-border-field); border-radius: 0;
+  color: var(--mtf-color-text-primary); font-family: var(--mtf-font-body); font-weight: var(--mtf-font-body-weight);
+  font-size: var(--mtf-font-size-field); text-transform: none; color-scheme: dark;
+}
+.mtf-input, .mtf-select { height: 40px; padding-block: 0; } /* exactly 40 px; padding + text would make 43 */
+.mtf-textarea { min-height: 100px; resize: vertical; }
+.mtf-input::placeholder, .mtf-textarea::placeholder { color: var(--mtf-color-text-placeholder); }
+.mtf-input[aria-invalid="true"], .mtf-textarea[aria-invalid="true"], .mtf-select[aria-invalid="true"] { border-color: var(--mtf-color-text-error); }
+.mtf-field-error { color: var(--mtf-color-text-error); font-size: var(--mtf-font-size-label-sm); text-transform: none; }
+/* Form sections (<fieldset> with a Heading 4 <legend>), notes and the live status line. */
+.mtf-form__group { margin: 0; padding: 0; border: 0; min-width: 0; display: flex; flex-direction: column; gap: var(--mtf-space-20); }
+.mtf-form__group legend { padding: 0; margin-bottom: var(--mtf-space-20); }
+.mtf-form__group + .mtf-form__group { margin-top: var(--mtf-space-20); }
+.mtf-form__status:empty { display: none; }
+/* Submit loading state: the label hides (still announced) and a white spinner shows. */
+.mtf-button[aria-busy="true"] { color: transparent; position: relative; }
+.mtf-button[aria-busy="true"]::after { content: ""; position: absolute; width: 18px; height: 18px; border: 2px solid var(--mtf-brand-white);
+  border-right-color: transparent; border-radius: 50%; animation: mtf-spin 1s linear infinite; }
+@keyframes mtf-spin { to { transform: rotate(360deg); } }
+
+/* ---------- Cards and panels ---------- */
+.mtf-panel { background: var(--mtf-color-bg-surface); border: var(--mtf-border-subtle); }
+
+.mtf-speaker-grid { display: grid; grid-template-columns: repeat(var(--mtf-layout-speaker-columns), minmax(0, 1fr)); gap: var(--mtf-space-24); width: 100%; }
+.mtf-speaker-card { display: flex; flex-direction: column; height: 420px; overflow: hidden; background: var(--mtf-color-bg-surface); border: var(--mtf-border-subtle); }
+.mtf-speaker-card img { width: 100%; height: 240px; object-fit: cover; }
+.mtf-speaker-card__body { flex: 1; display: flex; flex-direction: column; justify-content: space-between; gap: var(--mtf-space-16); padding: var(--mtf-space-16); }
+.mtf-speaker-card__text { display: flex; flex-direction: column; gap: var(--mtf-space-8); }
+.mtf-speaker-card h3 { font-size: var(--mtf-font-size-h6); }
+@media (max-width: 809.98px) {
+  .mtf-speaker-card { height: auto; }
+  .mtf-speaker-card img { height: auto; aspect-ratio: 1.43; }
+  .mtf-speaker-card__body { gap: var(--mtf-space-24); }
+}
+
+.mtf-modal { padding: 0; border: var(--mtf-border-subtle); background: var(--mtf-color-bg-surface); color: var(--mtf-color-text-primary); width: min(741px, 92vw); max-height: 90vh; }
+.mtf-modal::backdrop { background: rgb(29 85 82 / 0.8); }
+.mtf-modal__inner { display: grid; grid-template-columns: 360px 1fr; min-height: 366px; }
+.mtf-modal__inner img { width: 100%; height: 100%; object-fit: cover; }
+.mtf-modal__content { padding: var(--mtf-space-16); display: flex; flex-direction: column; gap: var(--mtf-space-16); overflow: auto; max-height: 366px; }
+.mtf-modal__close { align-self: flex-end; }
+.mtf-modal__heading { display: flex; flex-direction: column; gap: var(--mtf-space-8); }
+@media (max-width: 809.98px) { .mtf-modal__inner { grid-template-columns: 1fr; } .mtf-modal__inner img { height: 300px; } .mtf-modal__content { max-height: none; } }
+
+.mtf-faq { width: 100%; display: flex; flex-direction: column; gap: var(--mtf-space-24); }
+.mtf-faq details { background: var(--mtf-color-bg-surface); border: var(--mtf-border-subtle); padding: var(--mtf-space-24); transition: background var(--mtf-motion-hover-duration) var(--mtf-ease-standard); }
+.mtf-faq details:not([open]):hover { background: var(--mtf-color-bg-surface-hover); }
+.mtf-faq summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: var(--mtf-space-24); font-family: var(--mtf-font-heading); font-style: italic; font-size: var(--mtf-font-size-h6); }
+.mtf-faq summary::-webkit-details-marker { display: none; }
+.mtf-faq summary span { flex: 1; }
+.mtf-faq summary svg { width: 36px; height: 36px; flex: none; transition: transform var(--mtf-motion-toggle-duration) ease; }
+.mtf-faq details[open] summary svg { transform: rotate(45deg); } /* the plus turns into an X */
+.mtf-faq details p { margin-top: var(--mtf-space-24); }
+
+.mtf-schedule__days { width: 100%; display: flex; flex-direction: column; gap: var(--mtf-space-36); } /* days, then the note */
+.mtf-schedule__note { color: var(--mtf-color-text-secondary); }
+.mtf-day { width: 100%; display: flex; flex-direction: column; gap: var(--mtf-space-24); padding: var(--mtf-space-16); background: var(--mtf-color-bg-surface); border: var(--mtf-border-subtle); }
+.mtf-day h3 { font-size: var(--mtf-font-size-h4); }
+.mtf-day ul { list-style: none; margin: 0; padding: 0; }
+.mtf-row { display: flex; align-items: flex-start; gap: var(--mtf-space-24); padding: var(--mtf-space-8) var(--mtf-space-12); background: var(--mtf-color-bg-row-dark); }
+.mtf-row:nth-child(even) { background: var(--mtf-color-bg-row-light); }
+.mtf-row time { flex: none; width: 100px; font-size: var(--mtf-font-size-body-display); line-height: var(--mtf-line-height-display); text-transform: uppercase; }
+.mtf-row__text { flex: 1; display: flex; align-items: flex-start; gap: var(--mtf-space-16); }
+.mtf-row__copy { flex: 1; display: flex; flex-direction: column; gap: var(--mtf-space-8); }
+.mtf-row__title { font-size: var(--mtf-font-size-body-display); line-height: var(--mtf-line-height-display); text-transform: uppercase; }
+.mtf-row__details { color: var(--mtf-color-text-secondary); }
+@media (max-width: 809.98px) { .mtf-row time { width: 60px; } .mtf-row__text { flex-direction: column; } }
+
+.mtf-feature-card {
+  width: var(--mtf-layout-feature-card-width); max-width: 100%; position: relative;
+  display: flex; flex-direction: column; align-items: flex-start; gap: var(--mtf-space-24); padding: var(--mtf-space-24);
+  background: var(--mtf-color-bg-accent); border: var(--mtf-border-subtle);
+  -webkit-backdrop-filter: blur(var(--mtf-blur-backdrop)); backdrop-filter: blur(var(--mtf-blur-backdrop));
+}
+.mtf-feature-card__heading { display: flex; flex-direction: column; gap: var(--mtf-space-12); }
+.mtf-feature-card h2 { font-size: var(--mtf-font-size-h3); }
+.mtf-feature-card .mtf-floral { top: -105px; right: -98px; width: 264px; z-index: 2; }
+/* Daffodils variant (the stadium card): turned 75° and cropped to a 264 × 269 box. */
+.mtf-feature-card .mtf-floral--daffodils { top: -76px; right: -132px; height: 269px; --floral-rotate: 75deg; }
+.mtf-feature-card .mtf-floral--daffodils img { height: 100%; object-fit: cover; }
+@media (max-width: 809.98px) { .mtf-feature-card { width: 100%; } .mtf-feature-card .mtf-floral { width: 200px; top: -90px; right: -60px; } }
+
+.mtf-highlights { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--mtf-space-40); width: 100%; }
+.mtf-highlight { display: flex; flex-direction: column; gap: var(--mtf-space-12); }
+.mtf-highlight h3 { font-size: var(--mtf-font-size-h5); }
+@media (max-width: 809.98px) { .mtf-highlights { grid-template-columns: 1fr; } }
+
+.mtf-story { margin: 0; display: flex; flex-direction: column; gap: var(--mtf-space-24); }
+.mtf-story h3 { font-size: var(--mtf-font-size-h5); }
+.mtf-story blockquote { margin: 0; }
+.mtf-story figcaption { display: flex; flex-direction: column; gap: var(--mtf-space-8); }
+.mtf-story figcaption strong { font-weight: inherit; font-size: var(--mtf-font-size-body-display); line-height: var(--mtf-line-height-display); text-transform: uppercase; }
+
+/* ---------- Chrome ---------- */
+.mtf-header {
+  position: fixed; inset: 0 0 auto 0; z-index: 10;
+  padding: var(--mtf-space-20) var(--mtf-layout-page-margin);
+  background: var(--mtf-color-bg-nav);
+  -webkit-backdrop-filter: blur(var(--mtf-blur-backdrop)); backdrop-filter: blur(var(--mtf-blur-backdrop));
+}
+.mtf-header__inner { max-width: var(--mtf-layout-container-max); margin-inline: auto; display: flex; align-items: center; justify-content: space-between; gap: var(--mtf-space-24); }
+.mtf-header nav { display: flex; align-items: center; gap: var(--mtf-space-24); }
+.mtf-logo img, .mtf-logo svg { width: 137px; height: auto; }
+/* Skip link: hidden until focused (pair with .mtf-visually-hidden). */
+.mtf-skip:focus { position: fixed !important; top: var(--mtf-space-12); left: var(--mtf-space-12); z-index: 100; width: auto; height: auto; clip: auto;
+  padding: var(--mtf-space-12) var(--mtf-space-24); background: var(--mtf-color-action-primary); color: var(--mtf-color-text-primary); }
+@media (max-width: 809.98px) { .mtf-header .mtf-nav-link { display: none; } }
+
+.mtf-footer { padding: var(--mtf-space-60); background: var(--mtf-color-bg-page); }
+.mtf-footer__inner { max-width: var(--mtf-layout-container-max); margin-inline: auto; display: flex; justify-content: space-between; align-items: flex-start; gap: var(--mtf-space-40); }
+.mtf-footer .mtf-logo img, .mtf-footer .mtf-logo svg { width: 275px; }
+.mtf-footer nav { display: flex; gap: var(--mtf-space-36); }
+.mtf-footer nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: flex-start; gap: var(--mtf-space-18); }
+@media (max-width: 809.98px) {
+  .mtf-footer { padding: var(--mtf-space-20); }
+  .mtf-footer__inner { flex-direction: column-reverse; gap: var(--mtf-space-36); }
+  .mtf-footer nav { flex-direction: column; gap: var(--mtf-space-18); }
+  .mtf-footer .mtf-logo img, .mtf-footer .mtf-logo svg { width: 165px; }
+}
+
+/* Photo strip: tiles keep a 5:4 shape at every width (400 × 320 at 1200, 270 × 216 at 810, 195 × 156 at 390). */
+.mtf-photo-strip { display: grid; grid-auto-flow: column; grid-auto-columns: calc(100% / 3); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; }
+.mtf-photo-strip::-webkit-scrollbar { display: none; }
+.mtf-photo-strip img { width: 100%; height: auto; aspect-ratio: 5 / 4; object-fit: cover; scroll-snap-align: start; }
+.mtf-photo-strip:focus-visible { outline-offset: -3px; }
+@media (max-width: 809.98px) { .mtf-photo-strip { grid-auto-columns: 50%; } }
+
+/* Carousel arrows sit on the wrapper, not inside the scroller (inside, they scroll away with the content). Next on the
+   right, Previous on the left; hide each at its end (the script in example.html does this). */
+.mtf-photo-strip-wrap, .mtf-carousel { position: relative; }
+.mtf-photo-strip-wrap > .mtf-carousel-arrow, .mtf-carousel > .mtf-carousel-arrow { position: absolute; right: var(--mtf-space-16); top: 50%; translate: 0 -50%; z-index: 2; }
+.mtf-photo-strip-wrap > .mtf-carousel-arrow--prev, .mtf-carousel > .mtf-carousel-arrow--prev { right: auto; left: var(--mtf-space-16); }
+.mtf-carousel-arrow[hidden] { display: none; }
+
+/* ---------- Sections ---------- */
+.mtf-hero {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: var(--mtf-layout-hero-top) var(--mtf-layout-page-margin) var(--mtf-space-20);
+  background-size: cover; background-position: center;
+}
+.mtf-hero__lockup { width: 700px; max-width: 100%; aspect-ratio: 700 / 462; display: grid; place-items: center; }
+.mtf-hero__lockup img { width: 92%; height: auto; }
+@media (max-width: 809.98px) { .mtf-hero { padding: var(--mtf-layout-hero-top) 0 0; } .mtf-hero__lockup { width: 100%; } }
+
+.mtf-invitation .mtf-floral { right: -110px; bottom: 40px; width: 380px; }
+.mtf-invitation__details { display: flex; flex-direction: column; align-items: flex-start; gap: var(--mtf-space-40); flex: none; }
+.mtf-invitation__copy { display: flex; flex-direction: column; gap: var(--mtf-space-24); max-width: 600px; }
+/* Tablet: the lilies move to the top right, smaller (at the desktop spot they would cover the copy). */
+@media (max-width: 1199.98px) { .mtf-invitation .mtf-floral { top: 55px; bottom: auto; right: -104px; width: 253px; } }
+@media (max-width: 809.98px) {
+  .mtf-invitation .mtf-floral { top: 6px; right: -120px; width: 220px; }
+  .mtf-invitation__details { gap: var(--mtf-space-24); }
+}
+
+/* Speakers: daffodils (florals-04) turned 150°, behind the grid at the right; hidden on phones. */
+.mtf-speakers .mtf-floral { right: -160px; top: 185px; width: 917px; --floral-rotate: 150deg; }
+@media (max-width: 1199.98px) { .mtf-speakers .mtf-floral { right: -200px; } }
+@media (max-width: 809.98px) { .mtf-speakers .mtf-floral { display: none; } }
+
+.mtf-feature { background-size: cover; background-position: center; padding: var(--mtf-space-60) var(--mtf-layout-page-margin); overflow: visible; overflow-x: clip; }
+.mtf-feature .mtf-container { flex-direction: row; align-items: flex-end; }
+@media (max-width: 809.98px) { .mtf-feature { padding: var(--mtf-space-120) var(--mtf-layout-page-margin) var(--mtf-space-40); } }
+
+.mtf-stories { padding: var(--mtf-layout-panel-padding); }
+/* Stories: a carousel with two in view (wrap the list in .mtf-carousel with arrows); stacked on phones. */
+.mtf-stories .mtf-carousel { width: 100%; }
+.mtf-stories__list { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - var(--mtf-space-40)) / 2); gap: var(--mtf-space-40);
+  overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; }
+.mtf-stories__list::-webkit-scrollbar { display: none; }
+.mtf-stories__list > * { scroll-snap-align: start; }
+.mtf-stories .mtf-carousel > .mtf-carousel-arrow { right: -36px; } /* centered in the panel padding, clear of the text */
+.mtf-stories .mtf-carousel > .mtf-carousel-arrow--prev { left: -36px; right: auto; }
+/* Lilies (florals-01) turned -90° over the panel's top-right corner. */
+.mtf-stories .mtf-floral { top: -92px; right: -71px; width: 282px; --floral-rotate: -90deg; }
+@media (max-width: 809.98px) {
+  .mtf-stories__list { grid-auto-flow: row; grid-auto-columns: auto; overflow: visible; gap: var(--mtf-space-24); }
+  .mtf-stories .mtf-carousel > .mtf-carousel-arrow { display: none; }
+  .mtf-stories .mtf-floral { top: -66px; right: -76px; width: 199px; }
+}
+
+.mtf-contact { background: var(--mtf-color-bg-accent); }
+/* Daffodils (florals-04) standing upright: turned -90° (-135° on phones). */
+.mtf-contact .mtf-floral { right: -20px; top: 78px; width: 305px; --floral-rotate: -90deg; }
+@media (max-width: 1199.98px) { .mtf-contact .mtf-floral { right: -10px; top: 62px; } }
+@media (max-width: 809.98px) { .mtf-contact .mtf-floral { right: -105px; top: 52px; width: 217px; --floral-rotate: -135deg; } }
+.mtf-contact .mtf-container { gap: var(--mtf-space-24); }
+.mtf-contact a { color: var(--mtf-color-text-primary); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; }
+.mtf-contact a:hover { color: var(--mtf-color-text-hover); }
+
+.mtf-rsvp { padding-top: var(--mtf-layout-page-top); }
+.mtf-rsvp__intro { flex: 1; max-width: 500px; display: flex; flex-direction: column; gap: var(--mtf-space-24); }
+.mtf-rsvp .mtf-form { flex: 1; }
+/* Lilies (florals-03) at the lower left, cut off by the section edge; top right and turned on phones. */
+.mtf-rsvp .mtf-floral { left: -102px; bottom: -193px; width: 520px; }
+@media (max-width: 809.98px) { .mtf-rsvp .mtf-floral { left: auto; bottom: auto; right: -80px; top: 78px; width: 177px; --floral-rotate: -120deg; } }
+
+/* ---------- Motion ----------
+   Values from the 2026 Framer site; samples on the Figma file's Motion page. Entrances play once, when the element
+   scrolls into view: the script in example.html adds .mtf-motion to <html> (so nothing is hidden without JavaScript),
+   splits [data-reveal="words"] text into words, and adds .is-visible as elements enter the viewport. Springs are
+   Framer's own curves as CSS linear() (tokens.css). Optional per-element delay: style="--delay: 0.2s". */
+:root.mtf-motion .mtf-appear {
+  opacity: 0; translate: 0 var(--mtf-motion-appear-distance);
+  transition: opacity var(--mtf-motion-appear-duration) var(--mtf-ease-spring), translate var(--mtf-motion-appear-duration) var(--mtf-ease-spring), scale var(--mtf-motion-appear-duration) var(--mtf-ease-spring);
+  transition-delay: var(--delay, 0s);
+}
+:root.mtf-motion .mtf-appear--slide { translate: calc(-1 * var(--mtf-motion-appear-distance)) 0; } /* feature cards */
+:root.mtf-motion .mtf-appear--grow { translate: 0 var(--mtf-motion-panel-distance); scale: var(--mtf-motion-start-scale); } /* FAQ items, Stories panel */
+:root.mtf-motion .mtf-appear--pop { translate: none; scale: var(--mtf-motion-start-scale); } /* diamond markers, 0.2 s apart */
+:root.mtf-motion .mtf-appear.is-visible { opacity: 1; translate: none; scale: none; }
+
+/* Text reveal: words (headings, event details) or one block (body copy) rise 10 px out of a 10 px blur. */
+.mtf-word { display: inline-block; }
+:root.mtf-motion [data-reveal="words"]:not(.mtf-split) { visibility: hidden; } /* until the script has split it, so the text doesn't flash */
+:root.mtf-motion [data-reveal] .mtf-word, :root.mtf-motion [data-reveal="block"] {
+  opacity: 0; translate: 0 var(--mtf-motion-text-distance); filter: blur(var(--mtf-motion-text-blur));
+  transition: opacity var(--mtf-motion-appear-duration) var(--mtf-ease-spring-soft), translate var(--mtf-motion-appear-duration) var(--mtf-ease-spring-soft), filter var(--mtf-motion-appear-duration) var(--mtf-ease-spring-soft);
+  transition-delay: calc(var(--delay, 0s) + var(--i, 0) * var(--mtf-motion-text-stagger));
+}
+:root.mtf-motion [data-reveal].is-visible .mtf-word, :root.mtf-motion [data-reveal="block"].is-visible { opacity: 1; translate: none; filter: none; }
+
+/* Hero, on page load: the illustration settles from 120%; the tag and title card follow 0.2 s apart. */
+.mtf-hero { position: relative; isolation: isolate; overflow: clip; }
+.mtf-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: inherit; }
+:root.mtf-motion .mtf-hero::before { animation: mtf-settle var(--mtf-motion-appear-duration) var(--mtf-ease-spring-soft) both; }
+:root.mtf-motion .mtf-hero > .mtf-tag { animation: mtf-settle-in var(--mtf-motion-appear-duration) var(--mtf-ease-spring) var(--mtf-motion-stagger) both; }
+:root.mtf-motion .mtf-hero > .mtf-hero__lockup { animation: mtf-settle-in var(--mtf-motion-appear-duration) var(--mtf-ease-spring) calc(2 * var(--mtf-motion-stagger)) both; }
+
+/* FAQ: the plus turns into an X (above); the answer rises out of a blur; the height springs open where supported. */
+.mtf-faq details[open] > :not(summary) { animation: mtf-text-in var(--mtf-motion-quick-duration) var(--mtf-ease-spring-soft) both; }
+@supports (interpolate-size: allow-keywords) {
+  .mtf-faq { interpolate-size: allow-keywords; }
+  .mtf-faq details::details-content { block-size: 0; overflow: clip; transition: block-size var(--mtf-motion-quick-duration) var(--mtf-ease-spring), content-visibility var(--mtf-motion-quick-duration) allow-discrete; }
+  .mtf-faq details[open]::details-content { block-size: auto; }
+}
+
+/* Speaker modal: rises 150 px and fades in; the backdrop fades in. */
+.mtf-modal[open] { animation: mtf-rise var(--mtf-motion-appear-duration) var(--mtf-ease-spring) both; }
+.mtf-modal[open]::backdrop { animation: mtf-fade var(--mtf-motion-quick-duration) var(--mtf-ease-standard) both; }
+
+/* Parallax: florals with data-parallax move an extra 10% of the scroll (the script in example.html sets translate). */
+[data-parallax] { will-change: translate; }
+
+@keyframes mtf-settle { from { scale: var(--mtf-motion-hero-scale); } }
+@keyframes mtf-settle-in { from { opacity: 0; scale: var(--mtf-motion-hero-scale); } }
+@keyframes mtf-rise { from { opacity: 0; translate: 0 var(--mtf-motion-appear-distance); } }
+@keyframes mtf-fade { from { opacity: 0; } }
+@keyframes mtf-text-in { from { opacity: 0; translate: 0 var(--mtf-motion-text-distance); filter: blur(var(--mtf-motion-text-blur)); } }
+
+@media (prefers-reduced-motion: reduce) {
+  :root.mtf-motion .mtf-appear, :root.mtf-motion [data-reveal] .mtf-word, :root.mtf-motion [data-reveal="block"] { opacity: 1; translate: none; scale: none; filter: none; transition: none; }
+  :root.mtf-motion .mtf-hero::before, :root.mtf-motion .mtf-hero > *, .mtf-modal[open], .mtf-modal[open]::backdrop, .mtf-faq details[open] > :not(summary) { animation: none; }
+  .mtf-faq details::details-content { transition: none; }
+  [data-parallax] { translate: none !important; }
+  * { scroll-behavior: auto !important; }
+}
+
+/* ---------- Utilities ---------- */
+.mtf-visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

@@ -1,0 +1,16 @@
+---
+// Section / Schedule: title, days, note, RSVP.
+import ScheduleDay from '../components/ScheduleDay.astro';
+import Button from '../components/Button.astro';
+import { schedule, scheduleNote } from '../data/site';
+---
+<section id="schedule" class="mtf-section mtf-schedule" aria-labelledby="schedule-title">
+  <div class="mtf-container">
+    <h2 id="schedule-title" class="mtf-h1" data-reveal="words">Our Time Together</h2>
+    <div class="mtf-schedule__days">
+      {schedule.map((d) => <ScheduleDay day={d.day} date={d.date} rows={d.rows} />)}
+      <p class="mtf-schedule__note">{scheduleNote}</p>
+    </div>
+    <Button href="/register">RSVP</Button>
+  </div>
+</section>

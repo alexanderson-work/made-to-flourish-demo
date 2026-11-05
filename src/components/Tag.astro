@@ -1,0 +1,6 @@
+---
+// Tag (Figma: Labels & Forms → Tag). Regular or Small.
+interface Props { size?: 'regular' | 'small'; class?: string }
+const { size = 'regular', class: cls } = Astro.props;
+---
+<p class:list={['mtf-tag', size === 'small' && 'mtf-tag--small', cls]}><slot /></p>

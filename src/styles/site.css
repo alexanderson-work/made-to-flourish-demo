@@ -1,0 +1,10 @@
+/* Site-level additions on top of the design system's tokens.css and components.css, which are copied unchanged from
+   the design system package. Only things specific to this build live here. */
+
+/* Hero background: optimized at build time, with a smaller file on phones (see sections/Hero.astro). */
+.mtf-hero { background-image: var(--hero-bg); }
+@media (max-width: 809.98px) { .mtf-hero { background-image: var(--hero-bg-phone); } }
+
+/* This copy of the title card (the one the 2026 site used) has its own transparent margin, unlike the trimmed export
+   in the design system's assets, so it fills the box instead of the 92% components.css gives the trimmed file. */
+.mtf-hero__lockup img { width: 100%; }

@@ -1,0 +1,10 @@
+---
+// FAQ Item (Figma: Content → FAQ Item). The plus turns 45° into an X when open (components.css).
+import Icon from './Icon.astro';
+interface Props { question: string }
+const { question } = Astro.props;
+---
+<details class="mtf-appear mtf-appear--grow">
+  <summary><span>{question}</span><Icon name="plus" size={36} /></summary>
+  <p><slot /></p>
+</details>

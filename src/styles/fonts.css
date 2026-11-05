@@ -1,0 +1,6 @@
+/* Brand fonts, self-hosted from public/fonts/. Tiempos Text (Klim Type Foundry) and GT Pressura (Grilli Type) are
+   licensed to Made to Flourish: use them within that license. */
+@font-face { font-family: "Tiempos Text"; font-style: italic; font-weight: 400; font-display: swap;
+             src: url("/fonts/tiempos-text-regular-italic.woff2") format("woff2"); }
+@font-face { font-family: "GT Pressura"; font-style: normal; font-weight: 300; font-display: swap;
+             src: url("/fonts/gt-pressura-light.woff2") format("woff2"); }

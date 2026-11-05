@@ -1,0 +1,11 @@
+---
+// Icon Link (Figma: Actions → Icon Link). A link, or a button that opens a dialog when `opens` is set.
+import Icon from './Icon.astro';
+interface Props { href?: string; opens?: string; external?: boolean; class?: string }
+const { href, opens, external = false, class: cls } = Astro.props;
+---
+{opens ? (
+  <button type="button" class:list={['mtf-icon-link', cls]} aria-haspopup="dialog" data-open={opens}><slot /><Icon name="arrow-right" /></button>
+) : (
+  <a class:list={['mtf-icon-link', cls]} href={href} {...(external ? { target: '_blank', rel: 'noopener' } : {})}><slot /><Icon name="arrow-right" />{external && <span class="mtf-visually-hidden"> (opens in a new tab)</span>}</a>
+)}

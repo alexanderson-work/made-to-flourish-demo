@@ -1,0 +1,11 @@
+---
+// Section / FAQ.
+import FaqItem from '../components/FaqItem.astro';
+import { faqs } from '../data/site';
+---
+<section id="faq" class="mtf-section" aria-labelledby="faq-title">
+  <div class="mtf-container">
+    <h2 id="faq-title" class="mtf-h1" data-reveal="words">Frequently Asked Questions</h2>
+    <div class="mtf-faq">{faqs.map((f) => <FaqItem question={f.q}>{f.a}</FaqItem>)}</div>
+  </div>
+</section>

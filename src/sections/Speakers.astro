@@ -1,0 +1,15 @@
+---
+// Section / Speakers: title + 4-column grid (3 on tablet, 1 on phones) + one modal per speaker.
+import SpeakerCard from '../components/SpeakerCard.astro';
+import SpeakerModal from '../components/SpeakerModal.astro';
+import Floral from '../components/Floral.astro';
+import { speakers } from '../data/speakers';
+---
+<section id="speakers" class="mtf-section mtf-speakers" aria-labelledby="speakers-title">
+  <Floral name="daffodils" width={917} parallax />
+  <div class="mtf-container">
+    <h2 id="speakers-title" class="mtf-h1" data-reveal="words">Meet our speakers:</h2>
+    <div class="mtf-speaker-grid">{speakers.map((s) => <SpeakerCard speaker={s} />)}</div>
+  </div>
+  {speakers.map((s) => <SpeakerModal speaker={s} />)}
+</section>

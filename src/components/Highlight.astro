@@ -1,0 +1,7 @@
+---
+// Highlight (Figma: Content → Highlight).
+import Diamonds from './Diamonds.astro';
+interface Props { markers: number; title: string }
+const { markers, title } = Astro.props;
+---
+<div class="mtf-highlight"><Diamonds count={markers} /><h3 data-reveal="words">{title}</h3><p><slot /></p></div>

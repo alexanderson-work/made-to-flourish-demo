@@ -1,0 +1,16 @@
+---
+// Section / Hero: the illustration as a cover background, the invitation tag, and the title card with lilies.
+import { backgroundUrl } from '../lib/images';
+import Tag from '../components/Tag.astro';
+import Photo from '../components/Photo.astro';
+import { art } from '../data/media';
+import { event } from '../data/site';
+const bg = await backgroundUrl(art.heroBackground, 2400);
+const bgPhone = await backgroundUrl(art.heroBackground, 1200);
+---
+<section class="mtf-hero" aria-label={event.name} style={`--hero-bg: url('${bg}'); --hero-bg-phone: url('${bgPhone}')`}>
+  <Tag>By Exclusive Invitation Only</Tag>
+  <div class="mtf-hero__lockup">
+    <Photo src={art.lockupWithLilies} alt={event.name} widths={[700, 1400]} sizes="(max-width: 809.98px) 100vw, 700px" loading="eager" fetchpriority="high" />
+  </div>
+</section>
