@@ -334,7 +334,10 @@ main [id] { scroll-margin-top: 90px; }
 :root.mtf-motion .mtf-appear.is-visible { opacity: 1; translate: none; scale: none; }
 
 /* Text reveal: words (titles) or one block (body copy, event details, contact line) rise 10 px out of a 10 px blur. */
-.mtf-word { display: inline-block; }
+.mtf-word { display: inline-block; padding: 0.1em 0.2em; margin: -0.1em -0.2em; }
+/* The padding gives italic letters room: Tiempos Italic reaches up to ~0.15 em past a word's box, and while a word is
+   blurred or moving, browsers can cut it at that box (the edge of a P or an f shows clipped until the reveal ends).
+   The negative margin cancels it, so spacing doesn't change. */
 :root.mtf-motion [data-reveal="words"]:not(.mtf-split) { visibility: hidden; } /* until the script has split it, so the text doesn't flash */
 :root.mtf-motion [data-reveal] .mtf-word, :root.mtf-motion [data-reveal="block"] {
   opacity: 0; translate: 0 var(--mtf-motion-text-distance); filter: blur(var(--mtf-motion-text-blur));
