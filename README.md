@@ -6,6 +6,10 @@ site, and it's a starting point for new pages or new event sites.
 
 The pages carry `noindex, nofollow`, so search engines leave the demo alone.
 
+**Launching a new event from this repository with a coding agent?** Start with
+[`LAUNCHING-WITH-A-CODING-AGENT.md`](LAUNCHING-WITH-A-CODING-AGENT.md): the step-by-step workflow, house rules, checks,
+and every problem we hit building this site, with its fix.
+
 ## Run it
 
 Needs Node 22.12 or later.
