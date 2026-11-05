@@ -25,7 +25,7 @@ npm run build          # static site in dist/
 | `src/sections/` | One file per section of the design system: Hero, Invitation, Speakers, Feature on Photo, Highlights, Schedule, Stories, FAQ, Contact Band, RSVP Form |
 | `src/components/` | One file per design-system component: Button, Tag, Speaker Card and Modal, FAQ Item, Schedule Day, Feature Card, Header, Footer, Photo Strip and more |
 | `src/pages/` | The two pages, `/` and `/register`, stacked from sections |
-| `src/layouts/Base.astro` | The page shell and the small scripts: motion, speaker modals, carousels, form states |
+| `src/layouts/Base.astro` | The page shell, page changes (client router) and the small scripts: motion, speaker modals, carousels, form states |
 | `src/styles/` | `tokens.css` and `components.css` copied unchanged from the design system package; `site.css` holds the two lines specific to this build; `fonts.css` loads the brand fonts |
 | `src/assets/` | Photos and artwork. Astro resizes them and converts them to WebP when it builds. |
 | `public/fonts/` | Tiempos Text Regular Italic and GT Pressura Light (web files) |
@@ -49,6 +49,13 @@ view, florals drift with the scroll, and hovers use soft springs. In markup:
 - `<Floral … parallax />` for florals that drift.
 
 With reduced motion turned on, everything shows in place without movement.
+
+**Page changes.** Astro's client router (`<ClientRouter />` in `src/layouts/Base.astro`) keeps the header on screen
+(`transition:persist` in `src/components/Header.astro`) and cross-fades the page underneath it (0.35 s). Links are
+loaded on hover, so pages change almost at once. A link to a section of another page (e.g. RSVP → Speakers) lands on
+that section under the fade instead of scrolling down from the top. Because the page itself never reloads, the page
+scripts in `Base.astro` sit in one `init()` that runs for each page and is cleaned up before the next; put new page
+behavior there.
 
 ## Content and assets
 

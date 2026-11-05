@@ -1,9 +1,11 @@
 ---
 // Navigation (Figma: Chrome & Media → Navigation). Fixed; on phones only the wordmark and RSVP show.
+// transition:persist keeps this same header on screen when the page changes (Astro's client router), so it never
+// redraws, jumps or clips; Base.astro marks the current page in it after each change.
 import Button from './Button.astro';
 import { nav } from '../data/site';
 ---
-<header class="mtf-header">
+<header class="mtf-header" transition:persist="site-header">
   <div class="mtf-header__inner">
     <a class="mtf-logo" href="/" aria-label="Made to Flourish, home"><img src="/assets/logo-wordmark-white.svg" alt="" width="137" height="50" /></a>
     <nav aria-label="Main">
