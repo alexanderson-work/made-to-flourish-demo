@@ -7,6 +7,8 @@ import '../styles/site.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { ClientRouter } from 'astro:transitions';
+import tiemposItalic from '../assets/fonts/tiempos-text-regular-italic.woff2?url';
+import gtPressura from '../assets/fonts/gt-pressura-light.woff2?url';
 import { event } from '../data/site';
 interface Props { title?: string; description?: string }
 const { title = event.name, description = event.description } = Astro.props;
@@ -41,8 +43,8 @@ const socialImage = new URL('/social.png', Astro.site);
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
-    <link rel="preload" href="/fonts/tiempos-text-regular-italic.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/gt-pressura-light.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={tiemposItalic} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={gtPressura} as="font" type="font/woff2" crossorigin />
     <ClientRouter />
   </head>
   <body>

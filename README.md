@@ -28,7 +28,7 @@ npm run build          # static site in dist/
 | `src/layouts/Base.astro` | The page shell, page changes (client router) and the small scripts: motion, speaker modals, carousels, form states |
 | `src/styles/` | `tokens.css` and `components.css` copied unchanged from the design system package; `site.css` holds the two lines specific to this build; `fonts.css` loads the brand fonts |
 | `src/assets/` | Photos and artwork. Astro resizes them and converts them to WebP when it builds. |
-| `public/fonts/` | Tiempos Text Regular Italic and GT Pressura Light (web files) |
+| `src/assets/fonts/` | Tiempos Text Regular Italic and GT Pressura Light (web files), loaded by `src/styles/fonts.css` |
 
 ## The design system
 
