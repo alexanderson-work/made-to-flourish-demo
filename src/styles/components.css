@@ -55,9 +55,12 @@ main [id] { scroll-margin-top: 90px; }
 @media (max-width: 809.98px) { .mtf-columns { flex-direction: column; } }
 
 /* Florals: decorative cut-outs that overlap a section edge. Position per section (see Sections below). Use the class on
-   the <img> itself or on a wrapper around it. --floral-rotate turns it (several florals on the 2026 site are turned). */
-.mtf-floral { position: absolute; z-index: 0; pointer-events: none; height: auto; transform: rotate(var(--floral-rotate, 0deg)); }
-.mtf-floral img { width: 100%; height: auto; }
+   the <img> itself or on a wrapper around it. --floral-rotate turns it (several florals on the 2026 site are turned).
+   Sizes, positions, turns and crops are the 2026 Framer site's own, for the floral files in assets/ (they keep the
+   transparent margin the site used). Where a rule sets a height, the floral is cropped to that box (cover); the
+   section, feature card or Stories panel around it clips anything outside. */
+.mtf-floral { position: absolute; z-index: 0; pointer-events: none; height: auto; transform: rotate(var(--floral-rotate, 0deg)); object-fit: cover; }
+.mtf-floral img { width: 100%; height: 100%; object-fit: cover; }
 
 /* ---------- Actions ---------- */
 .mtf-button {
@@ -138,7 +141,9 @@ main [id] { scroll-margin-top: 90px; }
 
 .mtf-speaker-grid { display: grid; grid-template-columns: repeat(var(--mtf-layout-speaker-columns), minmax(0, 1fr)); gap: var(--mtf-space-24); width: 100%; }
 .mtf-speaker-card { display: flex; flex-direction: column; height: 420px; overflow: hidden; background: var(--mtf-color-bg-surface); border: var(--mtf-border-subtle); }
-.mtf-speaker-card img { width: 100%; height: 240px; object-fit: cover; }
+.mtf-speaker-card img { width: 100%; height: 240px; object-fit: cover; object-position: var(--mtf-photo-focus, 50% 50%); }
+/* --mtf-photo-focus keeps a face in frame when the photo is cropped: set it on the <img> (style="--mtf-photo-focus:
+   46% 10%"), as an object-position. The 2026 site's values for each speaker are in DESIGN-SYSTEM.md. */
 .mtf-speaker-card__body { flex: 1; display: flex; flex-direction: column; justify-content: space-between; gap: var(--mtf-space-16); padding: var(--mtf-space-16); }
 .mtf-speaker-card__text { display: flex; flex-direction: column; gap: var(--mtf-space-8); }
 .mtf-speaker-card h3 { font-size: var(--mtf-font-size-h6); }
@@ -151,7 +156,7 @@ main [id] { scroll-margin-top: 90px; }
 .mtf-modal { padding: 0; border: var(--mtf-border-subtle); background: var(--mtf-color-bg-surface); color: var(--mtf-color-text-primary); width: min(741px, 92vw); max-height: 90vh; }
 .mtf-modal::backdrop { background: rgb(29 85 82 / 0.8); }
 .mtf-modal__inner { display: grid; grid-template-columns: 360px 1fr; min-height: 366px; }
-.mtf-modal__inner img { width: 100%; height: 100%; object-fit: cover; }
+.mtf-modal__inner img { width: 100%; height: 100%; object-fit: cover; object-position: var(--mtf-photo-focus, 50% 50%); }
 .mtf-modal__content { padding: var(--mtf-space-16); display: flex; flex-direction: column; gap: var(--mtf-space-16); overflow: auto; max-height: 366px; }
 .mtf-modal__close { align-self: flex-end; }
 .mtf-modal__heading { display: flex; flex-direction: column; gap: var(--mtf-space-8); }
@@ -189,11 +194,11 @@ main [id] { scroll-margin-top: 90px; }
 }
 .mtf-feature-card__heading { display: flex; flex-direction: column; gap: var(--mtf-space-12); }
 .mtf-feature-card h2 { font-size: var(--mtf-font-size-h3); }
+.mtf-feature-card { overflow: clip; } /* the floral shows only inside the card, as on the site */
 .mtf-feature-card .mtf-floral { top: -105px; right: -98px; width: 264px; z-index: 2; }
 /* Daffodils variant (the stadium card): turned 75° and cropped to a 264 × 269 box. */
-.mtf-feature-card .mtf-floral--daffodils { top: -76px; right: -132px; height: 269px; --floral-rotate: 75deg; }
-.mtf-feature-card .mtf-floral--daffodils img { height: 100%; object-fit: cover; }
-@media (max-width: 809.98px) { .mtf-feature-card { width: 100%; } .mtf-feature-card .mtf-floral { width: 200px; top: -90px; right: -60px; } }
+.mtf-feature-card .mtf-floral--daffodils { top: -75px; right: -132px; height: 268px; --floral-rotate: 75deg; } /* cropped to the box */
+@media (max-width: 809.98px) { .mtf-feature-card { width: 100%; } .mtf-feature-card .mtf-floral { top: -115px; right: -138px; } }
 
 .mtf-highlights { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--mtf-space-40); width: 100%; }
 .mtf-highlight { display: flex; flex-direction: column; gap: var(--mtf-space-12); }
@@ -257,20 +262,20 @@ main [id] { scroll-margin-top: 90px; }
 .mtf-hero__lockup img { width: 92%; height: auto; }
 @media (max-width: 809.98px) { .mtf-hero { padding: var(--mtf-layout-hero-top) 0 0; } .mtf-hero__lockup { width: 100%; } }
 
-.mtf-invitation .mtf-floral { right: -110px; bottom: 40px; width: 380px; }
+.mtf-invitation .mtf-floral { right: -211px; bottom: -114px; width: 461px; } /* runs off the lower right edge */
 .mtf-invitation__details { display: flex; flex-direction: column; align-items: flex-start; gap: var(--mtf-space-40); flex: none; }
 .mtf-invitation__copy { display: flex; flex-direction: column; gap: var(--mtf-space-24); max-width: 600px; }
 /* Tablet: the lilies move to the top right, smaller (at the desktop spot they would cover the copy). */
-@media (max-width: 1199.98px) { .mtf-invitation .mtf-floral { top: 55px; bottom: auto; right: -104px; width: 253px; } }
+@media (max-width: 1199.98px) { .mtf-invitation .mtf-floral { top: 55px; bottom: auto; right: -103px; width: 253px; } }
 @media (max-width: 809.98px) {
-  .mtf-invitation .mtf-floral { top: 6px; right: -120px; width: 220px; }
+  .mtf-invitation .mtf-floral { top: 14px; right: -149px; width: 319px; }
   .mtf-invitation__details { gap: var(--mtf-space-24); }
 }
 
-/* Speakers: daffodils (florals-04) turned 150°, behind the grid at the right; hidden on phones. */
-.mtf-speakers .mtf-floral { right: -160px; top: 185px; width: 917px; --floral-rotate: 150deg; }
-@media (max-width: 1199.98px) { .mtf-speakers .mtf-floral { right: -200px; } }
-@media (max-width: 809.98px) { .mtf-speakers .mtf-floral { display: none; } }
+/* Speakers: daffodils (florals-04) turned 150°, behind the grid; placed by its center as a share of the section, as on
+   the site. On phones: turned 165°, as wide as the section plus 248 px and 621 px tall, cropped, 11 px off the bottom. */
+.mtf-speakers .mtf-floral { left: calc(75.08% - 458.5px); top: calc(42.39% - 310.5px); width: 917px; --floral-rotate: 150deg; }
+@media (max-width: 809.98px) { .mtf-speakers .mtf-floral { left: -128px; top: auto; bottom: 11px; width: calc(100% + 248px); height: 621px; --floral-rotate: 165deg; } }
 
 .mtf-feature { background-size: cover; background-position: center; padding: var(--mtf-space-60) var(--mtf-layout-page-margin); overflow: visible; overflow-x: clip; }
 .mtf-feature .mtf-container { flex-direction: row; align-items: flex-end; }
@@ -286,16 +291,18 @@ main [id] { scroll-margin-top: 90px; }
 .mtf-stories .mtf-carousel > .mtf-carousel-arrow { right: -36px; } /* centered in the panel padding, clear of the text */
 .mtf-stories .mtf-carousel > .mtf-carousel-arrow--prev { left: -36px; right: auto; }
 /* Lilies (florals-01) turned -90° over the panel's top-right corner. */
-.mtf-stories .mtf-floral { top: -92px; right: -71px; width: 282px; --floral-rotate: -90deg; }
+.mtf-stories { overflow: clip; } /* the floral shows only inside the panel, as on the site */
+.mtf-stories .mtf-floral { top: -91px; right: -71px; width: 282px; --floral-rotate: -90deg; }
+@media (min-width: 810px) and (max-width: 1199.98px) { .mtf-stories .mtf-floral { top: -131px; right: -91px; } }
 @media (max-width: 809.98px) {
   .mtf-stories__list { grid-auto-flow: row; grid-auto-columns: auto; overflow: visible; gap: var(--mtf-space-24); }
   .mtf-stories .mtf-carousel > .mtf-carousel-arrow { display: none; }
-  .mtf-stories .mtf-floral { top: -66px; right: -76px; width: 199px; }
+  .mtf-stories .mtf-floral { top: -65px; right: -75px; width: 199px; }
 }
 
 .mtf-contact { background: var(--mtf-color-bg-accent); }
 /* Daffodils (florals-04) standing upright: turned -90° (-135° on phones). */
-.mtf-contact .mtf-floral { right: -20px; top: 78px; width: 305px; --floral-rotate: -90deg; }
+.mtf-contact .mtf-floral { right: -21px; top: 78px; width: 305px; --floral-rotate: -90deg; }
 @media (max-width: 1199.98px) { .mtf-contact .mtf-floral { right: -10px; top: 62px; } }
 @media (max-width: 809.98px) { .mtf-contact .mtf-floral { right: -105px; top: 52px; width: 217px; --floral-rotate: -135deg; } }
 .mtf-contact .mtf-container { gap: var(--mtf-space-24); }
@@ -307,7 +314,7 @@ main [id] { scroll-margin-top: 90px; }
 .mtf-rsvp .mtf-form { flex: 1; }
 /* Lilies (florals-03) at the lower left, cut off by the section edge; top right and turned on phones. */
 .mtf-rsvp .mtf-floral { left: -102px; bottom: -193px; width: 520px; }
-@media (max-width: 809.98px) { .mtf-rsvp .mtf-floral { left: auto; bottom: auto; right: -80px; top: 78px; width: 177px; --floral-rotate: -120deg; } }
+@media (max-width: 809.98px) { .mtf-rsvp .mtf-floral { left: auto; bottom: auto; right: -79px; top: 77px; width: 177px; --floral-rotate: -120deg; } }
 
 /* ---------- Motion ----------
    Values from the 2026 Framer site; samples on the Figma file's Motion page. Entrances play once, when the element

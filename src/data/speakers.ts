@@ -1,10 +1,13 @@
 import { speakerPhotos } from './media';
 
-export type Speaker = { id: string; name: string; title: string; photo: ImageMetadata; bio: string[] };
+// `focus`: where each photo is anchored when it's cropped (an object-position), from the 2026 site, so faces stay in
+// frame. `card` is the speaker card, `modal` the bio popup; leave one out for the center.
+export type Speaker = { id: string; name: string; title: string; photo: ImageMetadata; focus?: { card?: string; modal?: string }; bio: string[] };
 
 const list: Omit<Speaker, 'photo'>[] = [
   {
     id: 'andy-crouch',
+    focus: { card: '46.2% 9.8%' },
     name: 'Andy Crouch',
     title: 'Best-Selling Author & Speaker, Partner at Praxis',
     bio: [
@@ -15,6 +18,7 @@ const list: Omit<Speaker, 'photo'>[] = [
   },
   {
     id: 'tom-nelson',
+    focus: { card: '50.4% 0%', modal: '54.4% 9.8%' },
     name: 'Tom Nelson',
     title: 'Founder & Executive Chairman, Made to Flourish',
     bio: [
@@ -23,6 +27,7 @@ const list: Omit<Speaker, 'photo'>[] = [
   },
   {
     id: 'matt-rusten',
+    focus: { card: '49.4% 15.2%', modal: '48.4% 15%' },
     name: 'Matt Rusten',
     title: 'President, Made To Flourish',
     bio: [
@@ -39,6 +44,7 @@ const list: Omit<Speaker, 'photo'>[] = [
   },
   {
     id: 'marcellus-casey',
+    focus: { card: '48.7% 19.1%', modal: '48.5% 20.8%' },
     name: 'Marcellus Casey',
     title: 'Chaplain, Kansas City Chiefs',
     bio: [
@@ -52,6 +58,7 @@ const list: Omit<Speaker, 'photo'>[] = [
   },
   {
     id: 'thomas-kim',
+    focus: { card: '51.8% 25.9%' },
     name: 'Thomas Kim',
     title: 'Founder & CEO, Everclean Car Wash',
     bio: [
@@ -60,6 +67,7 @@ const list: Omit<Speaker, 'photo'>[] = [
   },
   {
     id: 'stephen-bruner',
+    focus: { card: '46.3% 14.5%', modal: '46.3% 30.2%' },
     name: 'Stephen Bruner',
     title: 'Co-Founder and former Co-CEO of Corkcicle',
     bio: [
@@ -69,6 +77,7 @@ const list: Omit<Speaker, 'photo'>[] = [
   },
   {
     id: 'damein-schitter',
+    focus: { card: '50% 22.5%', modal: '51.5% 21.7%' },
     name: 'Damein Schitter',
     title: 'Director for Faith, Work, and Culture at Reformed Theological Seminary',
     bio: [

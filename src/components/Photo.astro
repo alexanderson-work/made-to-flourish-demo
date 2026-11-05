@@ -2,11 +2,11 @@
 // Responsive image. Astro resizes it and converts it to WebP at build time; the fallback src is capped at the largest
 // of `widths`, so no full-size original ships.
 import { Image } from 'astro:assets';
-interface Props { src: ImageMetadata; alt: string; widths?: number[]; sizes?: string; class?: string; loading?: 'lazy' | 'eager'; fetchpriority?: 'high' | 'low' | 'auto' }
-const { src, alt, widths = [400, 800, 1200], sizes = '100vw', class: cls, loading = 'lazy', fetchpriority } = Astro.props;
+interface Props { src: ImageMetadata; alt: string; widths?: number[]; sizes?: string; class?: string; style?: string; loading?: 'lazy' | 'eager'; fetchpriority?: 'high' | 'low' | 'auto' }
+const { src, alt, widths = [400, 800, 1200], sizes = '100vw', class: cls, style, loading = 'lazy', fetchpriority } = Astro.props;
 const usable = widths.filter((w) => w <= src.width);
 const list = usable.length ? usable : [src.width];
 const width = Math.max(...list);
 const height = Math.round((width * src.height) / src.width);
 ---
-<Image src={src} alt={alt} width={width} height={height} widths={list} sizes={sizes} format="webp" quality={80} class={cls} loading={loading} decoding="async" fetchpriority={fetchpriority} />
+<Image src={src} alt={alt} width={width} height={height} widths={list} sizes={sizes} format="webp" quality={80} class={cls} style={style} loading={loading} decoding="async" fetchpriority={fetchpriority} />

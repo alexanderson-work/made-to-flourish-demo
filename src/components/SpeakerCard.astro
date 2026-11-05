@@ -7,7 +7,7 @@ interface Props { speaker: Speaker }
 const { speaker } = Astro.props;
 ---
 <article class="mtf-speaker-card mtf-appear">
-  <Photo src={speaker.photo} alt={speaker.name} widths={[400, 800]} sizes="(max-width: 809.98px) 100vw, (max-width: 1199.98px) 33vw, 282px" />
+  <Photo src={speaker.photo} alt={speaker.name} style={speaker.focus?.card && `--mtf-photo-focus: ${speaker.focus.card}`} widths={[400, 800]} sizes="(max-width: 809.98px) 100vw, (max-width: 1199.98px) 33vw, 282px" />
   <div class="mtf-speaker-card__body">
     <div class="mtf-speaker-card__text"><h3>{speaker.name}</h3><p>{speaker.title}</p></div>
     <IconLink opens={`bio-${speaker.id}`}>Learn More<span class="mtf-visually-hidden"> about {speaker.name}</span></IconLink>
