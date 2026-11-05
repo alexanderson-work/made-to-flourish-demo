@@ -51,7 +51,8 @@ view, florals drift with the scroll, and hovers use soft springs. In markup:
 With reduced motion turned on, everything shows in place without movement.
 
 **Page changes.** Astro's client router (`<ClientRouter />` in `src/layouts/Base.astro`) keeps the header on screen
-(`transition:persist` in `src/components/Header.astro`) and cross-fades the page underneath it (0.35 s). Links are
+(`transition:persist` in `src/components/Header.astro`): the page content fades out (0.2 s) and the new page fades in
+(0.4 s) under it, with the header's blur live throughout. Links are
 loaded on hover, so pages change almost at once. A link to a section of another page (e.g. RSVP → Speakers) lands on
 that section under the fade instead of scrolling down from the top. Because the page itself never reloads, the page
 scripts in `Base.astro` sit in one `init()` that runs for each page and is cleaned up before the next; put new page

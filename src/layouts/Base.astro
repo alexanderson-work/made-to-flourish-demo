@@ -6,7 +6,7 @@ import '../styles/components.css';
 import '../styles/site.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { ClientRouter, fade } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 import { event } from '../data/site';
 interface Props { title?: string; description?: string }
 const { title = event.name, description = event.description } = Astro.props;
@@ -15,7 +15,7 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site);
 const socialImage = new URL('/social.png', Astro.site);
 ---
 <!doctype html>
-<html lang="en" transition:animate={fade({ duration: '0.35s' })}>
+<html lang="en" transition:animate="none">
   <head>
     <meta charset="utf-8" />
     <script is:inline>
@@ -176,14 +176,32 @@ const socialImage = new URL('/social.png', Astro.site);
       };
 
       let cleanup = init();
+
+      // Page change: the page content fades out while the next page loads, then the new content fades in under the
+      // header. This replaces the browser's view-transition cross-fade, which animates a picture of each page: in that
+      // picture the header's backdrop blur is missing, so the hero showed sharp through the nav until the blur popped
+      // back in. Here the header stays the live element the whole time.
+      const pageParts = () => [...document.querySelectorAll<HTMLElement>('main, .mtf-footer')];
+      const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.addEventListener('astro:before-preparation', (e) => {
+        const load = e.loader;
+        e.loader = async () => {
+          const out = reduced() ? [] : pageParts().map((el) => el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, easing: 'ease-out', fill: 'forwards' }));
+          e.signal.addEventListener('abort', () => out.forEach((a) => a.cancel()));
+          try { await Promise.all([load(), ...out.map((a) => a.finished.catch(() => {}))]); }
+          catch (err) { out.forEach((a) => a.cancel()); throw err; }
+        };
+      });
       document.addEventListener('astro:before-swap', (e) => {
         cleanup();
+        if (e.viewTransition) { e.viewTransition.ready.catch(() => {}); e.viewTransition.skipTransition(); }
         // Arriving at a section from another page (e.g. RSVP → /#speakers): jump there while the page fades in, instead
         // of smooth-scrolling down from the top. Smooth scrolling comes back once the new page is in place.
         const swap = e.swap;
         e.swap = () => { swap(); document.documentElement.style.scrollBehavior = 'auto'; };
       });
       document.addEventListener('astro:after-swap', () => {
+        if (!reduced()) pageParts().forEach((el) => el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 400, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' }));
         cleanup = init();
         requestAnimationFrame(() => requestAnimationFrame(() => document.documentElement.style.removeProperty('scroll-behavior')));
       });
