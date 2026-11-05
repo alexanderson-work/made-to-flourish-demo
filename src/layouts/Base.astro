@@ -65,11 +65,17 @@ const socialImage = new URL('/social.png', Astro.site);
         el.classList.add('mtf-split');
       };
       document.querySelectorAll('[data-reveal="words"]').forEach(splitWords);
-      const io = new IntersectionObserver(
-        (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } }),
-        { threshold: 0 },
-      );
-      document.querySelectorAll('.mtf-appear, [data-reveal]').forEach((el) => io.observe(el));
+      // Start once the brand fonts are in (at most 1 s) and the page has painted, so nothing reveals in a fallback font
+      // or mid-paint; .mtf-ready also releases the hero.
+      const start = () => {
+        const io = new IntersectionObserver(
+          (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } }),
+          { threshold: 0 },
+        );
+        document.querySelectorAll('.mtf-appear, [data-reveal]').forEach((el) => io.observe(el));
+        document.documentElement.classList.add('mtf-ready');
+      };
+      Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 1000))]).then(() => requestAnimationFrame(() => requestAnimationFrame(start)));
 
       // Parallax: florals move an extra 10% of the scroll, centered on their section.
       const florals = [...document.querySelectorAll<HTMLElement>('[data-parallax]')];

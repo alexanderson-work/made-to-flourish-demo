@@ -320,7 +320,9 @@ main [id] { scroll-margin-top: 90px; }
    Values from the 2026 Framer site; samples on the Figma file's Motion page. Entrances play once, when the element
    scrolls into view: the script in example.html adds .mtf-motion to <html> (so nothing is hidden without JavaScript),
    splits [data-reveal="words"] text into words, and adds .is-visible as elements enter the viewport. Springs are
-   Framer's own curves as CSS linear() (tokens.css). Optional per-element delay: style="--delay: 0.2s". */
+   Framer's own curves as CSS linear() (tokens.css). Optional per-element delay: style="--delay: 0.2s".
+   The script starts everything at once, after the brand fonts have loaded (at most 1 s) and the page has painted, and
+   then adds .mtf-ready, so nothing reveals in a fallback font or while the page is still drawing. */
 :root.mtf-motion .mtf-appear {
   opacity: 0; translate: 0 var(--mtf-motion-appear-distance);
   transition: opacity var(--mtf-motion-appear-duration) var(--mtf-ease-spring), translate var(--mtf-motion-appear-duration) var(--mtf-ease-spring), scale var(--mtf-motion-appear-duration) var(--mtf-ease-spring);
@@ -331,7 +333,7 @@ main [id] { scroll-margin-top: 90px; }
 :root.mtf-motion .mtf-appear--pop { translate: none; scale: var(--mtf-motion-start-scale); } /* diamond markers, 0.2 s apart */
 :root.mtf-motion .mtf-appear.is-visible { opacity: 1; translate: none; scale: none; }
 
-/* Text reveal: words (headings, event details) or one block (body copy) rise 10 px out of a 10 px blur. */
+/* Text reveal: words (titles) or one block (body copy, event details, contact line) rise 10 px out of a 10 px blur. */
 .mtf-word { display: inline-block; }
 :root.mtf-motion [data-reveal="words"]:not(.mtf-split) { visibility: hidden; } /* until the script has split it, so the text doesn't flash */
 :root.mtf-motion [data-reveal] .mtf-word, :root.mtf-motion [data-reveal="block"] {
@@ -347,6 +349,7 @@ main [id] { scroll-margin-top: 90px; }
 :root.mtf-motion .mtf-hero::before { animation: mtf-settle var(--mtf-motion-appear-duration) var(--mtf-ease-spring-soft) both; }
 :root.mtf-motion .mtf-hero > .mtf-tag { animation: mtf-settle-in var(--mtf-motion-appear-duration) var(--mtf-ease-spring) var(--mtf-motion-stagger) both; }
 :root.mtf-motion .mtf-hero > .mtf-hero__lockup { animation: mtf-settle-in var(--mtf-motion-appear-duration) var(--mtf-ease-spring) calc(2 * var(--mtf-motion-stagger)) both; }
+:root.mtf-motion:not(.mtf-ready) .mtf-hero::before, :root.mtf-motion:not(.mtf-ready) .mtf-hero > * { animation-play-state: paused; } /* held until the page is ready */
 
 /* FAQ: the plus turns into an X (above); the answer rises out of a blur; the height springs open where supported. */
 .mtf-faq details[open] > :not(summary) { animation: mtf-text-in var(--mtf-motion-quick-duration) var(--mtf-ease-spring-soft) both; }
