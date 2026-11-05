@@ -6,9 +6,10 @@ site, and it's a starting point for new pages or new event sites.
 
 The pages carry `noindex, nofollow`, so search engines leave the demo alone.
 
-**Launching a new event from this repository with a coding agent?** Start with
-[`LAUNCHING-WITH-A-CODING-AGENT.md`](LAUNCHING-WITH-A-CODING-AGENT.md): the step-by-step workflow, house rules, checks,
-and every problem we hit building this site, with its fix.
+**Launching a new event site with a coding agent?** See
+[`LAUNCHING-WITH-A-CODING-AGENT.md`](LAUNCHING-WITH-A-CODING-AGENT.md). It works from the Figma file alone (this
+repository is an optional reference) and covers the setup, the reference values, every problem we hit building this
+site with its fix, and the checks.
 
 ## Run it
 
